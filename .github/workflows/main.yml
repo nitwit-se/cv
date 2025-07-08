@@ -1,0 +1,27 @@
+name: Build PDF and autocommit
+
+on: push
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build_and_commit_job:
+    if: github.even_name == 'push' 
+    runs-on: ubuntu-latest
+    name: Build and archive
+    steps: 
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+      - name: LaTeX compilation
+        uses: dante-ev/latex-action@2021-A
+        with:
+          # The root LaTeX file to be compiled
+          root_file: markdixon.tex
+          # LaTeX engine to be used
+          compiler: pdflatex 
+      # Commit all changed files back to the repository
+      - uses: stefanzweifel/git-auto-commit-action@v6      
+
+      
