@@ -8,7 +8,6 @@ defaults:
 
 jobs:
   build_and_commit_job:
-    if: github.even_name == 'push' 
     runs-on: ubuntu-latest
     name: Build and archive
     steps: 
